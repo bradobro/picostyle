@@ -1,4 +1,4 @@
-import {h} from "ultradom";
+import {h} from "preact";
 import picostyle from "../..";
 
 const style = picostyle(h);

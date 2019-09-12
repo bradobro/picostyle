@@ -1,24 +1,24 @@
-import {h, patch} from "ultradom";
-import picostyle from "../../";
+import { h } from "preact"
+import picostyle from "../../"
 
-const ps = picostyle(h);
+const ps = picostyle(h)
 
 function view(state: any) {
-  const keyColor = "#f07";
+  const keyColor = "#f07"
 
   const Text = ps("h1")({
     ":hover": {
-        transform: "scale(1.3)",
+      transform: "scale(1.3)"
     },
     "@media (max-width: 450px)": {
-        fontSize: "32px",
+      fontSize: "32px"
     },
-    "color": "#fff",
-    "cursor": "pointer",
-    "fontSize": "64px",
-    "padding": "0.4em",
-    "transition": "all .2s ease-in-out",
-  });
+    color: "#fff",
+    cursor: "pointer",
+    fontSize: "64px",
+    padding: "0.4em",
+    transition: "all .2s ease-in-out"
+  })
 
   const Wrapper = ps("div")({
     alignItems: "center",
@@ -26,14 +26,14 @@ function view(state: any) {
     display: "flex",
     height: "100vh",
     justifyContent: "center",
-    width: "100vw",
-  });
+    width: "100vw"
+  })
 
   return (
     <Wrapper>
       <Text>{state.trim() === "" ? ":)" : state}</Text>
     </Wrapper>
-  );
+  )
 }
 
-document.body.appendChild(patch(view("Hello, Picostyle")));
+document.body.appendChild(patch(view("Hello, Picostyle")))

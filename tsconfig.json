@@ -1,13 +1,12 @@
 {
-    "compilerOptions": {
-      "strict": true,
-      "noEmit": true,
-      "jsx": "react",
-      "jsxFactory": "h",
-      "baseUrl": "./",
-      "paths": {
-        "picostyle": ["src", "picostyle.d.ts"]
-      }
-    },
-    "include": ["*.ts", "*.tsx", "**/*.ts", "**/*.tsx"]
-  }
+  "compilerOptions": {
+    "strict": true,
+    "jsx": "react",
+    "jsxFactory": "h",
+    "baseUrl": "./",
+    "paths": {
+      "picostyle": ["src", "picostyle.d.ts"]
+    }
+  },
+  "include": ["src/*.ts"]
+}
