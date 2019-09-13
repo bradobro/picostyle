@@ -1,6 +1,10 @@
-import { h, Component } from "preact"
+import { h, Component, RenderableProps } from "preact"
 
 type createComponent = typeof h
+
+// interface createComponent {}
+
+interface Component2 {}
 
 interface Styles {
   [key: string]: any
@@ -69,21 +73,38 @@ function createStyle(rules: string[], prefix: string) {
   return id
 }
 
-// function style(element: string | Component) {
-//   return function(decls: Styles) {
-//     return function(attributes: any, children: any) {
-//       attributes = attributes || {}
-//       children = attributes.children || children
-//       var nodeDecls = typeof decls == "function" ? decls(attributes) : decls
-//       attributes.class = [css(nodeDecls), attributes.class]
-//         .filter(Boolean)
-//         .join(" ")
-//       return h(element, attributes, children)
-//     }
-//   }
-// }
+type renderFunction = (props: any) => Element
 
-// export function keyframes(obj) {
-//   var rule = wrap(parse(obj, 1).join(""), "")
-//   return createStyle([rule], "@keyframes ")
-// }
+type stylerFunction = (styles: Styles) => renderFunction
+
+type stylerFunctionFactory = (element: Component) => stylerFunction
+
+export default function(h: createComponent) {
+  const sff: stylerFunctionFactory = (element: string | Component) => {
+    const sf: stylerFunction = () => {
+      const rf: renderFunction = (props: any) => {
+        return h(element, props)
+      }
+      return rf
+    }
+    return sf
+    // const styler: stylerFunction = (styles: Styles) :renderFunction =>
+    // //   return function(decls: Styles) {
+    // //     return function(attributes: any, children: any) {
+    // //       attributes = attributes || {}
+    // //       children = attributes.children || children
+    // //       var nodeDecls = typeof decls == "function" ? decls(attributes) : decls
+    // //       attributes.class = [css(nodeDecls), attributes.class]
+    // //         .filter(Boolean)
+    // //         .join(" ")
+    // //       return h(element, attributes, children)
+    // //     }
+    // return styler
+  }
+  return { css: css, style: sff }
+}
+
+export function keyframes(obj: StyleProps): string {
+  var rule = wrap(parse(obj, true).join(""), "")
+  return createStyle([rule], "@keyframes ")
+}

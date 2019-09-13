@@ -59,20 +59,33 @@ function createStyle(rules, prefix) {
     });
     return id;
 }
-// function style(element: string | Component) {
-//   return function(decls: Styles) {
-//     return function(attributes: any, children: any) {
-//       attributes = attributes || {}
-//       children = attributes.children || children
-//       var nodeDecls = typeof decls == "function" ? decls(attributes) : decls
-//       attributes.class = [css(nodeDecls), attributes.class]
-//         .filter(Boolean)
-//         .join(" ")
-//       return h(element, attributes, children)
-//     }
-//   }
-// }
-// export function keyframes(obj) {
-//   var rule = wrap(parse(obj, 1).join(""), "")
-//   return createStyle([rule], "@keyframes ")
-// }
+function default_1(h) {
+    var sff = function (element) {
+        var sf = function () {
+            var rf = function (props) {
+                return h(element, props);
+            };
+            return rf;
+        };
+        return sf;
+        // const styler: stylerFunction = (styles: Styles) :renderFunction =>
+        // //   return function(decls: Styles) {
+        // //     return function(attributes: any, children: any) {
+        // //       attributes = attributes || {}
+        // //       children = attributes.children || children
+        // //       var nodeDecls = typeof decls == "function" ? decls(attributes) : decls
+        // //       attributes.class = [css(nodeDecls), attributes.class]
+        // //         .filter(Boolean)
+        // //         .join(" ")
+        // //       return h(element, attributes, children)
+        // //     }
+        // return styler
+    };
+    return { css: css, style: sff };
+}
+exports["default"] = default_1;
+function keyframes(obj) {
+    var rule = wrap(parse(obj, true).join(""), "");
+    return createStyle([rule], "@keyframes ");
+}
+exports.keyframes = keyframes;
